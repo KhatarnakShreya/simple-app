@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d1117" />
+    <title>Neon Snake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="game-intro" aria-labelledby="game-title">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">ARCADE / 001</p>
+        <h1 id="game-title">Neon<br /><em>Snake</em></h1>
+        <p class="lede">Eat the light.<br />Stay in the grid.</p>
+        <div class="intro-rule"></div>
+        <p class="tip"><span class="tip-key">SPACE</span> to pause</p>
+      </section>
+
+      <section class="game-panel" aria-label="Snake game">
+        <header class="scoreboard">
+          <div class="score-block">
+            <span class="stat-label">SCORE</span>
+            <strong id="score">000</strong>
+          </div>
+          <div class="status-block">
+            <span id="status-dot" class="status-dot is-live"></span>
+            <span id="status-text">LIVE</span>
+          </div>
+          <div class="score-block high-score">
+            <span class="stat-label">BEST</span>
+            <strong id="high-score">000</strong>
+          </div>
+        </header>
+
+        <div class="board-frame">
+          <canvas id="game-canvas" width="600" height="600" aria-label="Snake game board"></canvas>
+          <div id="message" class="board-message is-hidden">
+            <p class="message-kicker">SYSTEM MESSAGE</p>
+            <h2 id="message-title">Game over</h2>
+            <p id="message-copy">Your run ended at 000 points.</p>
+            <button id="restart-button" class="primary-button" type="button">Play again <span>↗</span></button>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <p class="control-hint"><span>ARROW KEYS</span> move <i></i> <span>SPACE</span> pause</p>
+          <button id="pause-button" class="icon-button" type="button" aria-label="Pause game" title="Pause game"><span class="pause-icon"></span></button>
+          <div class="d-pad" aria-label="Touch controls">
+            <button class="direction-button up" type="button" data-direction="up" aria-label="Move up">↑</button>
+            <button class="direction-button left" type="button" data-direction="left" aria-label="Move left">←</button>
+            <button class="direction-button down" type="button" data-direction="down" aria-label="Move down">↓</button>
+            <button class="direction-button right" type="button" data-direction="right" aria-label="Move right">→</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

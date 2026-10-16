@@ -1,0 +1,109 @@
+:root {
+  --ink: #0d1117;
+  --paper: #f2eee5;
+  --acid: #d4f542;
+  --coral: #ff715b;
+  --muted: #8e978f;
+  --line: rgba(242, 238, 229, 0.16);
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--paper);
+  background: var(--ink);
+  font-family: var(--font-display);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  background-image: linear-gradient(rgba(242, 238, 229, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(242, 238, 229, 0.025) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.game-shell {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.72fr) minmax(480px, 1.3fr);
+  gap: clamp(40px, 8vw, 140px);
+  align-items: center;
+  width: min(1200px, calc(100% - 64px));
+  min-height: 100vh;
+  margin: auto;
+  padding: 56px 0;
+}
+
+.game-intro { align-self: center; }
+.brand-mark { display: flex; gap: 4px; margin-bottom: 36px; }
+.brand-mark span { width: 10px; height: 10px; background: var(--acid); }
+.brand-mark span:nth-child(2) { background: var(--coral); }
+.brand-mark span:nth-child(3) { background: var(--paper); }
+.eyebrow, .stat-label, .tip, .control-hint, .message-kicker { font: 500 11px/1 var(--font-mono); letter-spacing: 0.16em; }
+.eyebrow { color: var(--acid); margin: 0 0 22px; }
+h1 { margin: 0; font-size: clamp(58px, 8vw, 108px); line-height: 0.85; letter-spacing: -0.08em; font-weight: 600; }
+h1 em { color: var(--acid); font-style: normal; }
+.lede { color: var(--muted); font-size: 17px; line-height: 1.4; margin: 34px 0 40px; }
+.intro-rule { width: 46px; border-top: 2px solid var(--coral); margin-bottom: 22px; }
+.tip { color: var(--muted); letter-spacing: 0.08em; }
+.tip-key { color: var(--paper); border: 1px solid var(--line); padding: 6px 8px; margin-right: 8px; }
+
+.game-panel { width: 100%; max-width: 650px; justify-self: end; }
+.scoreboard { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; padding: 0 0 16px; }
+.score-block { display: flex; flex-direction: column; gap: 7px; }
+.score-block strong { font: 500 30px/1 var(--font-mono); letter-spacing: -0.08em; }
+.stat-label { color: var(--muted); font-size: 9px; }
+.high-score { text-align: right; align-items: end; }
+.status-block { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--acid); font: 500 10px var(--font-mono); letter-spacing: 0.14em; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 14px var(--acid); }
+.status-dot.is-paused { background: var(--coral); box-shadow: 0 0 14px var(--coral); }
+.status-dot.is-over { background: var(--muted); box-shadow: none; }
+
+.board-frame { position: relative; padding: 12px; background: #171d22; border: 1px solid var(--line); box-shadow: 18px 18px 0 rgba(0,0,0,0.18); }
+canvas { display: block; width: 100%; height: auto; aspect-ratio: 1; background: #11171c; image-rendering: pixelated; }
+.board-message { position: absolute; inset: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(13, 17, 23, 0.9); }
+.board-message.is-hidden { display: none; }
+.message-kicker { color: var(--coral); margin: 0 0 12px; }
+.board-message h2 { margin: 0; font-size: 40px; letter-spacing: -0.07em; }
+.board-message p:not(.message-kicker) { color: var(--muted); margin: 12px 0 24px; font-family: var(--font-mono); font-size: 12px; }
+.primary-button { border: 0; padding: 14px 18px; color: var(--ink); background: var(--acid); font: 600 12px var(--font-display); cursor: pointer; transition: transform 150ms ease, background 150ms ease; }
+.primary-button span { padding-left: 12px; font-size: 17px; }
+.primary-button:hover { background: var(--paper); transform: translateY(-2px); }
+
+.game-controls { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; }
+.control-hint { margin: 0; color: var(--muted); font-size: 9px; letter-spacing: 0.08em; }
+.control-hint span { color: var(--paper); }
+.control-hint i { display: inline-block; height: 12px; border-left: 1px solid var(--line); vertical-align: middle; margin: 0 13px; }
+.icon-button { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); color: var(--paper); background: transparent; cursor: pointer; }
+.pause-icon, .pause-icon::after { width: 3px; height: 12px; background: currentColor; display: block; content: ""; }
+.pause-icon { position: relative; margin-right: 6px; }
+.pause-icon::after { position: absolute; left: 7px; top: 0; }
+.d-pad { display: none; position: relative; width: 96px; height: 72px; margin-top: 14px; }
+.direction-button { position: absolute; width: 30px; height: 30px; border: 1px solid var(--line); color: var(--paper); background: #171d22; font-size: 17px; cursor: pointer; }
+.direction-button:active { color: var(--ink); background: var(--acid); }
+.direction-button.up { top: 0; left: 33px; }.direction-button.left { bottom: 0; left: 0; }.direction-button.down { bottom: 0; left: 33px; }.direction-button.right { bottom: 0; right: 0; }
+
+@media (max-width: 780px) {
+  .game-shell { grid-template-columns: 1fr; gap: 32px; width: min(560px, calc(100% - 36px)); padding: 36px 0; }
+  .game-intro { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: start; }
+  .brand-mark { grid-row: span 3; margin: 5px 0 0; flex-direction: column; }
+  .eyebrow { margin-bottom: 14px; }.lede, .intro-rule, .tip { display: none; }
+  h1 { font-size: clamp(54px, 16vw, 80px); }
+  .game-panel { justify-self: stretch; }
+  .d-pad { display: block; }
+  .game-controls { align-items: flex-start; }
+  .icon-button { order: 3; margin-top: 31px; }
+}
+
+@media (max-width: 440px) {
+  .game-shell { width: calc(100% - 24px); padding: 24px 0; }
+  .board-frame { padding: 7px; }.board-message { inset: 7px; }.board-message h2 { font-size: 32px; }
+  .score-block strong { font-size: 25px; }.control-hint { font-size: 8px; }.control-hint i { margin: 0 7px; }
+}
